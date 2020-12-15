@@ -20,6 +20,7 @@ from mne_bids import BIDSPath, write_raw_bids
 
 from bids_validator import BIDSValidator
 
+
 def main(args):
     input_path = args["<input_path>"]
     output_path = args["<output_path>"]
@@ -32,12 +33,12 @@ def main(args):
         subj_data.append(get_subject_data(path))
     pprint(subj_data)
     exit()
-    # write to raw bids dir
-    # for data in subj_data:
-        # bids_path = BIDSPath(subject=data[0], session='01', run='05', datatype='eeg',
-                # bids_root=output_path)
-        # write_raw_bids(data[1], bids_path=bids_path)
-    # verify new bids dir
+# write to raw bids dir
+# for data in subj_data:
+# bids_path = BIDSPath(subject=data[0], session='01', run='05', datatype='eeg',
+# bids_root=output_path)
+# write_raw_bids(data[1], bids_path=bids_path)
+# verify new bids dir
     if not BIDSValidator().is_bids(output_path):
         # temporary trace
         print("failed")
@@ -47,6 +48,7 @@ def main(args):
     print("succeeded")
     exit(0)
 
+
 def get_subjects(path):
     paths = []
 
@@ -54,16 +56,19 @@ def get_subjects(path):
         paths = eeg_paths
 
     if set_paths := glob(pt.join(path, "./*/*.set")):
-        if paths: # Found both brainvision and eeglab
+        if paths:  # Found both brainvision and eeglab
             # prefer one over the other
-            print("Found both Brainvision and EEGLab datasets for the same subject")
+            print("Found both Brainvision and EEGLab datasets \
+                    for the same subject")
 
         paths = set_paths
 
     return paths
 
+
 def get_subject_data(path):
     pass
+
 
 if __name__ == "__main__":
     args = docopt(__doc__)
