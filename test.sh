@@ -22,8 +22,8 @@ run_test () {
 }
 
 ## Check that code conforms to pep8 and passes linter
-run_test "pycodestyle testing/" "Checking code style" "Code style check"
-run_test "pylint testing/" "Running pylint on code" "Lint check"
+run_test "pycodestyle eocb/" "Checking code style" "Code style check"
+run_test "pylint eocb/" "Running pylint on code" "Lint check"
 
 ## Run unit and integration tests
 run_test "python -m unittest" "Running python tests" "Tests"
