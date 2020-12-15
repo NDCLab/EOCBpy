@@ -50,7 +50,7 @@ def main(args):
 def get_subjects(path):
     paths = []
 
-    if eeg_paths := glob(pt.join(path, "./*/*.eeg")):
+    if eeg_paths := glob(pt.join(path, "./*/*.vhdr")):
         paths = eeg_paths
 
     if set_paths := glob(pt.join(path, "./*/*.set")):
@@ -68,12 +68,20 @@ def import_data(subjects, metadata_path):
     sd = []
 
     for path in subjects:
-        # Get mne.io.Raw
         path = pt.normpath(path)
         base_path = pt.dirname(path)
-        data = mne.io.read_raw_eeglab(path)
+        ext = pt.splitext(path)[1]
+
+        # Import data based on extension
+        if ext == ".vhdr":
+            data = mne.io.read_raw_brainvision(path)
+        elif ext == ".set":
+            data = mne.io.read_raw_eeglab(path)
+
+        # Get metadata
         metadata = load_metadata_file(pt.join(base_path, metadata_path))
 
+        # Update metadata
         for k in metadata.keys():
             data.info[k] = metadata[k]
 
