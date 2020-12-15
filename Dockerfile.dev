@@ -6,7 +6,7 @@ RUN bash -c "mkdir -p /workspace/{eocb,input,output,tmp}"
 WORKDIR /workspace
 
 # Install dependencies
-COPY ./eocb ./tmp
+COPY requirements* ./tmp/
 
 RUN pip install -r ./tmp/requirements.txt
 RUN pip install -r ./tmp/requirements-dev.txt

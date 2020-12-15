@@ -7,6 +7,7 @@ WORKDIR /workspace
 
 # Install dependencies
 COPY ./eocb/ ./eocb/
+COPY requirements.txt ./eocb/
 RUN pip install -r ./eocb/requirements.txt
 
 ENTRYPOINT ["bash", "./eocb/run.sh"]
