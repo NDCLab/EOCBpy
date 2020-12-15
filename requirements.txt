@@ -1,0 +1,4 @@
+docopt-ng
+mne
+mne-bids
+bids-validator
